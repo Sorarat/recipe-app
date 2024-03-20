@@ -1,0 +1,17 @@
+.search-bar{
+    width: 300px;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.container > * {
+    margin-right: 10px; /* Add space between input and button */
+}

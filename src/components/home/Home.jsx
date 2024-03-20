@@ -9,22 +9,43 @@ const Home = () => {
 
   const APP_ID = "072a7d8b";
   const APP_KEY = "523a71111a276320551a0eb6f7f61f7e";
-  const [recipes, setRecipes] = useState([]);
+  const [breakfastRecipes, setBreakfastRecipes] = useState([]);
+  const [lunchRecipes, setLunchRecipes] = useState([]);
+  const [brunchRecipes, setBrunchRecipes] = useState([]);
+  const [dinnerRecipes, setDinnerRecipes] = useState([]);
+
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("chicken");
 
   useEffect(() => {
-    getRecipes();
-  }, [query])
+    getRecipes('breakfast');
+    getRecipes('brunch');
+    getRecipes('lunch');
+    getRecipes('dinner');
+  }, [query]);
 
   // Function to fetch recipes based on the search query
-  const getRecipes = async () => {
+  const getRecipes = async (mealType) => {
     const response = await fetch (
-      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
+      `https://api.edamam.com/search?q=${query}&mealType=${mealType}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json();
-    setRecipes(data.hits);
-    console.log(data);
+    switch(mealType) {
+      case 'breakfast':
+        setBreakfastRecipes(data.hits);
+        break;
+      case 'brunch':
+        setBrunchRecipes(data.hits);
+        break;
+      case 'lunch':
+        setLunchRecipes(data.hits);
+        break;
+      case 'dinner':
+        setDinnerRecipes(data.hits);
+        break;
+      default:
+        break;
+    }
   };
 
   // Function to update the search query
@@ -45,8 +66,10 @@ const Home = () => {
         updateSearch = {updateSearch} 
         handleSubmit = {handleSubmit}
       />
-      <div className="recipes">
-        {recipes.map(recipe => (
+      <div className="recipe-container">
+        <h2>Breakfast</h2>
+        <div className="row">
+        {breakfastRecipes.map(recipe => (
         <RecipeCard 
           key = {recipe.recipe.label}
           title = {recipe.recipe.label}
@@ -54,7 +77,44 @@ const Home = () => {
           image={recipe.recipe.image}
           ingredients={recipe.recipe.ingredients}
         />
-      ))}
+        ))}
+        </div>
+        <h2>Brunch</h2>
+        <div className="row">
+        {brunchRecipes.map(recipe => (
+        <RecipeCard 
+          key = {recipe.recipe.label}
+          title = {recipe.recipe.label}
+          calories={recipe.recipe.calories}
+          image={recipe.recipe.image}
+          ingredients={recipe.recipe.ingredients}
+        />
+        ))}
+        </div>
+        <h2>Lunch</h2>
+        <div className="row">
+        {lunchRecipes.map(recipe => (
+        <RecipeCard 
+          key = {recipe.recipe.label}
+          title = {recipe.recipe.label}
+          calories={recipe.recipe.calories}
+          image={recipe.recipe.image}
+          ingredients={recipe.recipe.ingredients}
+        />
+        ))}
+        </div>
+        <h2>Dinner</h2>
+        <div className="row">
+          {dinnerRecipes.map(recipe => (
+          <RecipeCard 
+            key = {recipe.recipe.label}
+            title = {recipe.recipe.label}
+            calories={recipe.recipe.calories}
+            image={recipe.recipe.image}
+            ingredients={recipe.recipe.ingredients}
+          />
+          ))}
+        </div>
       </div>
     </div>
   );

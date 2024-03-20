@@ -6,6 +6,20 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.recipes {
+.recipe-container {
     display: flex;
+    flex-direction: column;
+
+}
+
+.recipe-container h2 {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.row {
+    display: flex;
+    flex-wrap : wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }

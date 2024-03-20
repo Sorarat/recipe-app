@@ -7,17 +7,8 @@ import MyProfile from './components/myprofile/MyProfile';
 import Favorites from './components/favorites/Favorites';
 import Logout from './components/logout/Logout';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import { useState } from 'react';
-import { useEffect } from 'react';
-
-const APP_ID = "072a7d8b";
-const APP_KEY = "523a71111a276320551a0eb6f7f61f7e";
 
 function App() {
-
-  const [recipes, setRecipes] = useState([])
-
-
 
   return (
     

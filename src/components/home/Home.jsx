@@ -97,57 +97,72 @@ const Home = () => {
         handleSubmit = {handleSubmit}
       />
       <div className="recipe-container">
-        <h2>Breakfast</h2>
-        <div className="row">
-        {breakfastRecipes.map(recipe => (
-        <RecipeCard 
-          key = {recipe.recipe.label}
-          title = {recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-          ingredients={recipe.recipe.ingredients}
-        />
-        ))}
-        </div>
-        <h2>Brunch</h2>
-        <div className="row">
-        {brunchRecipes.map(recipe => (
-        <RecipeCard 
-          key = {recipe.recipe.label}
-          title = {recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-          ingredients={recipe.recipe.ingredients}
-        />
-        ))}
-        </div>
-        <h2>Lunch</h2>
-        <div className="row">
-        {lunchRecipes.map(recipe => (
-        <RecipeCard 
-          key = {recipe.recipe.label}
-          title = {recipe.recipe.label}
-          calories={recipe.recipe.calories}
-          image={recipe.recipe.image}
-          ingredients={recipe.recipe.ingredients}
-        />
-        ))}
-        </div>
-        <h2>Dinner</h2>
-        <div className="row">
-          {dinnerRecipes.map(recipe => (
-          <RecipeCard 
-            key = {recipe.recipe.label}
-            title = {recipe.recipe.label}
-            calories={recipe.recipe.calories}
-            image={recipe.recipe.image}
-            ingredients={recipe.recipe.ingredients}
-          />
-          ))}
-        </div>
-      </div>
+        {query ? (
+          <div className="row">
+            {recipes.map(recipe => (
+              <RecipeCard
+                key = {recipe.recipe.label}
+                title = {recipe.recipe.label}
+                calories={recipe.recipe.calories}
+                image = {recipe.recipe.image}
+                ingredients={recipe.recipe.ingredients}
+                />
+            ))}
+          </div>
+        ) : (
+          <div>
+            <h2>Breakfast</h2>
+            <div className="row">
+              {breakfastRecipes.map(recipe => (
+              <RecipeCard 
+                key = {recipe.recipe.label}
+                title = {recipe.recipe.label}
+                calories={recipe.recipe.calories}
+                image={recipe.recipe.image}
+                ingredients={recipe.recipe.ingredients}
+              />
+              ))}
+            </div>
+            <h2>Brunch</h2>
+            <div className="row">
+              {brunchRecipes.map(recipe => (
+            <RecipeCard 
+              key = {recipe.recipe.label}
+              title = {recipe.recipe.label}
+              calories={recipe.recipe.calories}
+              image={recipe.recipe.image}
+              ingredients={recipe.recipe.ingredients}
+            />
+              ))}
+            </div>
+            <h2>Lunch</h2>
+            <div className="row">
+            {lunchRecipes.map(recipe => (
+            <RecipeCard 
+              key = {recipe.recipe.label}
+              title = {recipe.recipe.label}
+              calories={recipe.recipe.calories}
+              image={recipe.recipe.image}
+              ingredients={recipe.recipe.ingredients}
+            />
+            ))}
+            </div>
+            <h2>Dinner</h2>
+            <div className="row">
+              {dinnerRecipes.map(recipe => (
+              <RecipeCard 
+                key = {recipe.recipe.label}
+                title = {recipe.recipe.label}
+                calories={recipe.recipe.calories}
+                image={recipe.recipe.image}
+                ingredients={recipe.recipe.ingredients}
+              />
+              ))}
+            </div>
+          </div>
+        )}
     </div>
-  );
+  </div>
+);
 };
-
 export default Home

@@ -13,21 +13,38 @@ const Home = () => {
   const [lunchRecipes, setLunchRecipes] = useState([]);
   const [brunchRecipes, setBrunchRecipes] = useState([]);
   const [dinnerRecipes, setDinnerRecipes] = useState([]);
+  const [showMealType, setMealType] = useState(true);
+  const [recipes, setRecipes] = useState([]);
 
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("chicken");
+  const [query, setQuery] = useState("");
+
+  // useEffect(() => {
+  //   getRecipes('breakfast');
+  //   getRecipes('brunch');
+  //   getRecipes('lunch');
+  //   getRecipes('dinner');
+  // }, [query]);
 
   useEffect(() => {
-    getRecipes('breakfast');
-    getRecipes('brunch');
-    getRecipes('lunch');
-    getRecipes('dinner');
+    if (query) {
+      getRecipes();
+      setMealType(false);
+    }
+
+    else {
+      setMealType(true);
+      getMealRecipes('breakfast');
+      getMealRecipes('brunch');
+      getMealRecipes('lunch');
+      getMealRecipes('dinner');
+    }
   }, [query]);
 
-  // Function to fetch recipes based on the search query
-  const getRecipes = async (mealType) => {
+  // Function to fetch recipes when user first enter the site
+  const getMealRecipes = async (mealType) => {
     const response = await fetch (
-      `https://api.edamam.com/search?q=${query}&mealType=${mealType}&app_id=${APP_ID}&app_key=${APP_KEY}`
+      `https://api.edamam.com/search?q=${mealType}&mealType=${mealType}&app_id=${APP_ID}&app_key=${APP_KEY}`
     );
     const data = await response.json();
     switch(mealType) {
@@ -48,15 +65,28 @@ const Home = () => {
     }
   };
 
+    // Function to fetch recipes based on the search query
+  const getRecipes = async () => {
+    const response = await fetch (
+      `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
+    );
+    const data = await response.json();
+    setRecipes(data.hits);
+    console.log(data);
+  };
+
   // Function to update the search query
   const updateSearch = e => {
     setSearch(e.target.value);
+    setQuery(e.target.value); // Update query state with the search input value
   }
 
   // Function to handle form submission and perform the search
   const handleSubmit = e => {
     e.preventDefault();
     setQuery(search);
+    console.log('Query submitted:', search); // Add this line to verify the query value
+
   }
 
   return (

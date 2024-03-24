@@ -5,15 +5,10 @@ import  Button from "react-bootstrap/Button";
 
 const RecipeCard = ({title, calories, image, ingredients}) => {
   return (
-         <Card style={{ width: '18rem' }}>
+      <Card className="recipe-card">
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Card.Text>
-          {/* <ol>
-            {ingredients.map(ingredient => (
-              <li>{ingredient.text}</li>
-            ))}
-          </ol> */}
+        <Card.Title className="card-title">{title}</Card.Title>
+        <Card.Text className="card-calories">
           Calories: {calories.toFixed()}
         </Card.Text>
         <img className="image" src={image} alt=""/>

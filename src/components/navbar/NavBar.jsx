@@ -6,12 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 
-// expand="lg"
 
 const NavBar = () => {
   return (
     <div>
-      <Navbar expand="lg" className="bg-dark" variant="dark">
+      <Navbar expand="lg" className="bg" >
         <Container>
           <Navbar.Brand href="#home">RecipeLookUp</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

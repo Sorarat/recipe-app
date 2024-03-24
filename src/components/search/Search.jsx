@@ -20,8 +20,8 @@ const Search = ({updateSearch, handleSubmit}) => {
         value={searchTerm}
         onChange={handleChange}
       ></input>
-      <div className="btn">
-        <Button variant="primary" onClick={handleSubmit}>
+      <div className="btn-container">
+        <Button className="btn" onClick={handleSubmit}>
           Search
         </Button>
       </div>

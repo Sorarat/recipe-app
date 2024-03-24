@@ -6,6 +6,7 @@ import Categories from './components/categories/Categories';
 import MyProfile from './components/myprofile/MyProfile';
 import Favorites from './components/favorites/Favorites';
 import Logout from './components/logout/Logout';
+import Footer from './components/footer/Footer';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Logout/>
           </Route>
         </Switch>
+        <Footer/>
       </div>
     </Router>
   );

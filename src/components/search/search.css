@@ -3,6 +3,9 @@
     height: 40px;
     text-align: center;
     border-radius: 5px;
+    border-style: solid;
+    border-color: red;
+    margin-left: 10px;
 }
 
 .container {
@@ -14,4 +17,8 @@
 
 .container > * {
     margin-right: 10px; /* Add space between input and button */
+}
+
+.btn {
+    background-color: #4B0CF7;
 }

@@ -1,0 +1,28 @@
+.bg {
+    background-color: #0A142F;
+}
+
+/* Set the text color to white for all Nav.Link components */
+.nav-link {
+    color: white !important;
+}
+
+/* Set the text color to white for the Navbar.Brand component */
+.navbar-brand {
+    color: white !important;
+}
+
+/* Set the text color to white for the NavDropdown component */
+.navbar-nav .nav-link.dropdown-toggle {
+    color: white !important;
+}
+
+/* Set the text color to white for the dropdown items */
+.dropdown-item {
+    color: white !important;
+}
+
+.dropdown-menu {
+    background-color: #0A142F !important;
+}
+

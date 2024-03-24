@@ -9,63 +9,42 @@ const Home = () => {
 
   const APP_ID = "072a7d8b";
   const APP_KEY = "523a71111a276320551a0eb6f7f61f7e";
-  const [breakfastRecipes, setBreakfastRecipes] = useState([]);
-  const [lunchRecipes, setLunchRecipes] = useState([]);
-  const [brunchRecipes, setBrunchRecipes] = useState([]);
-  const [dinnerRecipes, setDinnerRecipes] = useState([]);
-  const [showMealType, setMealType] = useState(true);
-  const [recipes, setRecipes] = useState([]);
 
+  const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
+  const [preFetchedRecipes, setPreFetchedRecipes] = useState([]);
 
-  // useEffect(() => {
-  //   getRecipes('breakfast');
-  //   getRecipes('brunch');
-  //   getRecipes('lunch');
-  //   getRecipes('dinner');
-  // }, [query]);
-
+  
   useEffect(() => {
+
     if (query) {
       getRecipes();
-      setMealType(false);
     }
 
     else {
-      setMealType(true);
-      getMealRecipes('breakfast');
-      getMealRecipes('brunch');
-      getMealRecipes('lunch');
-      getMealRecipes('dinner');
+      console.log('Component mounted. Fetching prefetched recipes...');
+      const preFetchedRecipes = ['Spaghetti Carbonara', 'ice cream', 'spaghetti', 'chocolate cake', 'noodles', 'chicken', 'fish and chips', 'calamari'];
+      getMealRecipes(preFetchedRecipes);
+      
     }
   }, [query]);
 
   // Function to fetch recipes when user first enter the site
-  const getMealRecipes = async (mealType) => {
-    const response = await fetch (
-      `https://api.edamam.com/search?q=${mealType}&mealType=${mealType}&app_id=${APP_ID}&app_key=${APP_KEY}`
+  const getMealRecipes = async (recipeList) => {
+    const fetchedRecipes = await Promise.all(
+      recipeList.map(async (recipeName) => {
+        const response = await fetch (
+          `https://api.edamam.com/search?q=${recipeName}&app_id=${APP_ID}&app_key=${APP_KEY}`
+        );
+      const data = await response.json();
+      return data.hits[0]; //take only the first hit
+      })
     );
-    const data = await response.json();
-    switch(mealType) {
-      case 'breakfast':
-        setBreakfastRecipes(data.hits);
-        break;
-      case 'brunch':
-        setBrunchRecipes(data.hits);
-        break;
-      case 'lunch':
-        setLunchRecipes(data.hits);
-        break;
-      case 'dinner':
-        setDinnerRecipes(data.hits);
-        break;
-      default:
-        break;
-    }
-  };
+    setPreFetchedRecipes(fetchedRecipes);
+    };
 
-    // Function to fetch recipes based on the search query
+  // Function to fetch recipes based on the search query
   const getRecipes = async () => {
     const response = await fetch (
       `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
@@ -84,18 +63,24 @@ const Home = () => {
   // Function to handle form submission and perform the search
   const handleSubmit = e => {
     e.preventDefault();
-    setQuery(search);
+    // check if search term is not eampty
+    if (search.trim() !== "")
+    {
+      updateSearch(search)
+    }
     console.log('Query submitted:', search); // Add this line to verify the query value
 
   }
 
   return (
     <div>
-      <h1 className="question"> What are you craving today?</h1>
+      <div className='search-container'>
+      <h1 className="question"> Find recipes you love</h1>
       <Search
         updateSearch = {updateSearch} 
         handleSubmit = {handleSubmit}
       />
+      </div>
       <div className="recipe-container">
         {query ? (
           <div className="row">
@@ -111,58 +96,22 @@ const Home = () => {
           </div>
         ) : (
           <div>
-            <h2>Breakfast</h2>
-            <div className="row">
-              {breakfastRecipes.map(recipe => (
-              <RecipeCard 
-                key = {recipe.recipe.label}
-                title = {recipe.recipe.label}
-                calories={recipe.recipe.calories}
-                image={recipe.recipe.image}
-                ingredients={recipe.recipe.ingredients}
-              />
-              ))}
-            </div>
-            <h2>Brunch</h2>
-            <div className="row">
-              {brunchRecipes.map(recipe => (
-            <RecipeCard 
-              key = {recipe.recipe.label}
-              title = {recipe.recipe.label}
-              calories={recipe.recipe.calories}
-              image={recipe.recipe.image}
-              ingredients={recipe.recipe.ingredients}
-            />
-              ))}
-            </div>
-            <h2>Lunch</h2>
-            <div className="row">
-            {lunchRecipes.map(recipe => (
-            <RecipeCard 
-              key = {recipe.recipe.label}
-              title = {recipe.recipe.label}
-              calories={recipe.recipe.calories}
-              image={recipe.recipe.image}
-              ingredients={recipe.recipe.ingredients}
-            />
-            ))}
-            </div>
-            <h2>Dinner</h2>
-            <div className="row">
-              {dinnerRecipes.map(recipe => (
-              <RecipeCard 
-                key = {recipe.recipe.label}
-                title = {recipe.recipe.label}
-                calories={recipe.recipe.calories}
-                image={recipe.recipe.image}
-                ingredients={recipe.recipe.ingredients}
-              />
+            <h2>You may like</h2>
+            <div className='row'>
+              {preFetchedRecipes.slice(0,8).map(recipe => (
+                <RecipeCard 
+                  key = {recipe.recipe.label}
+                  title = {recipe.recipe.label}
+                  calories= {recipe.recipe.calories}
+                  image = {recipe.recipe.image}
+                  ingredients= {recipe.recipe.ingredients}
+                />
               ))}
             </div>
           </div>
         )}
     </div>
   </div>
-);
+  );
 };
 export default Home

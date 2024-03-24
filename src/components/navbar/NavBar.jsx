@@ -10,17 +10,17 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <div>
-      <Navbar expand="lg" className="bg" >
+      <Navbar expand="lg" className="bg">
         <Container>
           <Navbar.Brand href="#home">RecipeLookUp</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Toggle aria-controls="basic-navbar-nav" className="navbar-toggle"/>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
-              <Nav.Link as={Link} to="/categories">
-                Categories
+              <Nav.Link as={Link} to="/explore">
+                Explore
               </Nav.Link>
               <NavDropdown title="User" id="basic-nav-dropdown">
                 <NavDropdown.Item as={Link} to="/my-profile">

@@ -7,11 +7,13 @@ const RecipeCard = ({title, calories, image, ingredients}) => {
   return (
       <Card className="recipe-card">
       <Card.Body>
-        <Card.Title className="card-title">{title}</Card.Title>
-        <Card.Text className="card-calories">
+        {/* <Card.Text className="card-calories">
           Calories: {calories.toFixed()}
-        </Card.Text>
+        </Card.Text> */}
         <img className="image" src={image} alt=""/>
+        <div className="title-container">
+        <Card.Title className="card-title">{title}</Card.Title>
+        </div>
       </Card.Body>
     </Card>
   );

@@ -1,6 +1,6 @@
 .recipe-card {
     width: calc(25% - 20px); /* Adjust based on your design */
-    margin: 0 10px 20px 10px; /* Adjust margins */
+    margin: 0 10px 20px 10px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -8,6 +8,7 @@
 
 .recipe-card .card-body {
     padding: 1.25rem; /* Adjust padding */
+    width: 100;
 }
 
 .recipe-card-title {
@@ -30,4 +31,11 @@
     width: 250px;
     object-fit: cover; /* Maintain aspect ratio */
 
+}
+
+.title-container { 
+    background-color: #E9E3FF;
+    border: red;
+    border-style: dotted;
+    width: 100%;
 }

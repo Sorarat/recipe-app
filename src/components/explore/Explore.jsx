@@ -6,7 +6,7 @@ import Sidebar from "../sidebar/Sidebar";
 const Explore = () => {
   return (
     <>
-      <div className="container">
+      {/* <div className="container">
       <div className="row">
         <div className="col-md-3">
           <Sidebar />
@@ -14,9 +14,12 @@ const Explore = () => {
         <div className="col-md-9">
           <h1>Explore recipes</h1>
           {/* Add other content here */}
-        </div>
+        {/* </div>
       </div>
-    </div>
+    </div> */}
+
+    <h4> Explore recipes</h4>
+    <Sidebar/>
     </>
   );
 };

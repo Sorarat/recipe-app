@@ -16,7 +16,7 @@
 }  */
 
 
-.sidebar-container h4 {
+/* .sidebar-container h4 {
     margin-bottom: 5px;
 }
 
@@ -35,8 +35,9 @@
     width: 200px;
     background-color: #f8f9fa;
     z-index: 1000;
-}
+    bottom: 0; /* Extend the sidebar to the bottom */
+/* } */
 
-.btn-group-vertical {
+/* .btn-group-vertical {
     margin-bottom: 25px;
-}
+} */ 

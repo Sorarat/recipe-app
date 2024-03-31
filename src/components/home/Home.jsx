@@ -4,6 +4,7 @@ import RecipeCard from "../recipecard/recipeCard";
 import Search from '../search/Search';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Footer from '../footer/Footer';
 
 const Home = () => {
 
